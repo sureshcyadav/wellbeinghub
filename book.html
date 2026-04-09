@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Community Wellbeing Hub">
+  <title>Book Now - Community Wellbeing Hub</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="container">
+      <a href="index.html" class="navbar-brand"><img src="logo.png" alt="Wellbeing Hub logo" class="site-logo"> <span>Wellbeing Hub</span></a>
+      <div class="nav-links"><a href="index.html">Home</a>
+<a href="about.html">About Us</a>
+<a href="services.html">Services</a>
+<a href="events.html">Events</a>
+<a href="book.html" class="active">Book Now</a>
+<a href="news.html">News</a>
+<a href="contact.html">Contact</a>
+</div>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="12" x2="20" y2="12"></line><line x1="4" y1="6" x2="20" y2="6"></line><line x1="4" y1="18" x2="20" y2="18"></line></svg></button>
+    </div>
+    <div class="mobile-menu" id="mobile-menu"><a href="index.html">Home</a>
+<a href="about.html">About Us</a>
+<a href="services.html">Services</a>
+<a href="events.html">Events</a>
+<a href="book.html" class="active">Book Now</a>
+<a href="news.html">News</a>
+<a href="contact.html">Contact</a>
+</div>
+  </nav>
+  <main style="padding-top:64px">
+    
+    <section class="section booking-hero-simple">
+      <div class="container booking-hero-shell reveal-up">
+        <span class="badge" style="margin-bottom:1rem">Registration</span>
+        <h1 class="heading-hero" style="margin-bottom:1rem">Book an Event</h1>
+        <p class="text-body booking-hero-text">Complete the form below to register for an upcoming event or service. The process is quick, clear, and designed to help you confirm your place in just a few steps.</p>
+        <div class="booking-hero-pills">
+          <span>Fast 3-step booking</span>
+          <span>Accessibility support included</span>
+          <span>Instant on-page confirmation</span>
+        </div>
+      </div>
+    </section>
+    <section class="section" style="background:var(--bg)">
+      <div class="container booking-form-shell" style="max-width:760px;margin:0 auto">
+        <!-- Progress -->
+        <div class="progress-steps">
+          <div class="step-circle active" id="circle-1">1</div>
+          <div class="step-line inactive" id="line-1"></div>
+          <div class="step-circle inactive" id="circle-2">2</div>
+          <div class="step-line inactive" id="line-2"></div>
+          <div class="step-circle inactive" id="circle-3">3</div>
+        </div>
+
+        <form class="card" id="booking-form" onsubmit="submitBooking(event)">
+          <!-- Step 1 -->
+          <div class="form-step active" id="step-1">
+            <h2 style="font-size:1.5rem;margin-bottom:1rem">Personal Details</h2>
+            <div class="form-group">
+              <label for="book-name">Full Name *</label>
+              <input type="text" id="book-name" class="form-input" required>
+            </div>
+            <div class="form-group">
+              <label for="book-email">Email Address *</label>
+              <input type="email" id="book-email" class="form-input" required>
+            </div>
+            <div class="form-group">
+              <label for="book-phone">Phone Number</label>
+              <input type="tel" id="book-phone" class="form-input">
+            </div>
+            <button type="button" class="btn btn-primary w-full" onclick="goToStep(2)">Next: Choose Event</button>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="form-step" id="step-2">
+            <h2 style="font-size:1.5rem;margin-bottom:1rem">Event Selection</h2>
+            <div class="form-group">
+              <label for="book-event">Select Event *</label>
+              <select id="book-event" class="form-input" required>
+                <option value="">Choose an event...</option>
+                <option value="Morning Yoga in the Park">Morning Yoga in the Park</option><option value="Family Fun Day">Family Fun Day</option><option value="Mental Health Awareness Workshop">Mental Health Awareness Workshop</option><option value="Digital Skills for Beginners">Digital Skills for Beginners</option><option value="Community Garden Volunteer Day">Community Garden Volunteer Day</option><option value="Healthy Cooking on a Budget">Healthy Cooking on a Budget</option><option value="Senior Social & Tea Dance">Senior Social & Tea Dance</option><option value="Summer Wellbeing Fair">Summer Wellbeing Fair</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="book-date">Preferred Date</label>
+              <input type="date" id="book-date" class="form-input">
+            </div>
+            <div class="form-group">
+              <label for="book-participants">Number of Participants</label>
+              <input type="number" id="book-participants" class="form-input" min="1" max="10" value="1">
+            </div>
+            <div class="btn-row">
+              <button type="button" class="btn btn-outline" onclick="goToStep(1)">Back</button>
+              <button type="button" class="btn btn-primary" onclick="goToStep(3)">Next: Accessibility</button>
+            </div>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="form-step" id="step-3">
+            <h2 style="font-size:1.5rem;margin-bottom:1rem">Accessibility &amp; Confirmation</h2>
+            <div class="form-group">
+              <label for="book-needs">Any accessibility requirements?</label>
+              <textarea id="book-needs" class="form-input" rows="4" placeholder="e.g. wheelchair access, hearing loop, dietary requirements..."></textarea>
+            </div>
+            <div class="booking-summary">
+              <p style="font-weight:500;color:var(--fg);margin-bottom:0.5rem">Booking Summary</p>
+              <p><strong>Name:</strong> <span id="summary-name"></span></p>
+              <p><strong>Event:</strong> <span id="summary-event"></span></p>
+              <p><strong>Participants:</strong> <span id="summary-participants"></span></p>
+            </div>
+            <div class="btn-row">
+              <button type="button" class="btn btn-outline" onclick="goToStep(2)">Back</button>
+              <button type="submit" class="btn btn-accent">Confirm Booking</button>
+            </div>
+          </div>
+        </form>
+
+        <!-- Success -->
+        <div id="booking-success" class="card success-msg" style="display:none">
+          <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          <h2 class="heading-section" style="margin-bottom:1rem">Booking Confirmed!</h2>
+          <p class="text-body">Thank you, <strong id="confirm-name"></strong>.</p>
+          <p class="text-body" style="margin-bottom:1.5rem">You've been registered for <strong id="confirm-event"></strong>. A confirmation email will be sent to <strong id="confirm-email"></strong>.</p>
+          <button class="btn btn-primary" onclick="resetBooking()">Make Another Booking</button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-brand"><img src="logo.png" alt="Wellbeing Hub logo" class="footer-logo"><span style="font-family:var(--font-display);font-size:1.25rem;color:var(--warm)">Wellbeing Hub</span></div>
+          <p style="font-size:0.875rem;line-height:1.6">Supporting our community's health and wellbeing through accessible services, events, and support networks.</p>
+        </div>
+        <div>
+          <h4>Quick Links</h4>
+          <div class="footer-links">
+            <a href="about.html">About Us</a><a href="services.html">Services</a><a href="events.html">Events</a><a href="book.html">Book Now</a>
+          </div>
+        </div>
+        <div>
+          <h4>Resources</h4>
+          <div class="footer-links">
+            <a href="news.html">News & Stories</a><a href="contact.html">Contact Us</a><a href="#">Accessibility</a><a href="#">Privacy Policy</a>
+          </div>
+        </div>
+        <div>
+          <h4>Get in Touch</h4>
+          <div class="footer-contact-item"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg> 0800 123 4567</div>
+          <div class="footer-contact-item"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg> hello@wellbeinghub.org</div>
+          <div class="footer-contact-item"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> 42 Community Lane, Coventry</div>
+        </div>
+      </div>
+      <div class="footer-bottom">© 2026 Community Wellbeing Hub. All rights reserved.</div>
+    </div>
+  </footer>
+  <script src="main.js"></script>
+</body>
+</html>
